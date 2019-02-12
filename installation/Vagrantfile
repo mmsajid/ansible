@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "node1" do |m|   
       m.vm.box = BOX_IMAGE
-      m.vm.hostname = "node1"
+      m.vm.hostname = "client-node"
       m.vm.network "private_network", ip:"10.0.0.11"
   end
 
