@@ -10,17 +10,23 @@ Vagrant.configure("2") do |config|
   config.vm.define "master" do |m|
     m.vm.box = BOX_IMAGE
     m.vm.hostname = "master"
-    m.vm.network "private_network", ip:"10.0.0.10"
-    m.vm.provision "shell", inline: <<-SHELL
-        sudo yum -y update 
-        sudo yum -y install ansible 
-    SHELL
+    m.vm.network "private_network", type: "dhcp"
+
+    # You can install by using $ vagrant plugin install vagrant-vbguest
+    # in order use the following functionality
+    m.vm.synced_folder "data", "/home/vagrant/sharedData" 
+    
+    # m.vm.provision "shell", inline: <<-SHELL
+    #     sudo yum -y update 
+    #     sudo yum -y install ansible 
+    # SHELL
+   
   end
 
-  config.vm.define "node1" do |m|   
-      m.vm.box = BOX_IMAGE
-      m.vm.hostname = "client-node"
-      m.vm.network "private_network", ip:"10.0.0.11"
-  end
+  # config.vm.define "node1" do |m|   
+  #     m.vm.box = BOX_IMAGE
+  #     m.vm.hostname = "client-node"
+  #     m.vm.network "private_network", type: "dhcp"
+  # end
 
 end
